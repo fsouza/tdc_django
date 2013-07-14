@@ -1,4 +1,4 @@
-Deployment em Paas
+Deployment em PaaS
 
 - OpenShift
 - Heroku

@@ -47,3 +47,10 @@ class EnqueteTestCase(test.TestCase):
         resp = views.EnqueteView().dispatch(request, id=self.enquete.pk)
         self.assertEqual(200, resp.status_code)
         models.Voto.objects.get(opcao=opcao)
+
+    def test_deve_retornar_404_quando_opcao_nao_existe(self):
+        dados = {"opcao": 500}
+        request = test.RequestFactory().post("/enquetes/{0}".format(self.enquete.pk),
+                                             dados)
+        with self.assertRaises(http.Http404):
+            views.EnqueteView().dispatch(request, id=self.enquete.pk)

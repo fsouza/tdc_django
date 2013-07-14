@@ -17,6 +17,7 @@ class EnqueteView(base.View):
 
     def post(self, request, *args, **kwargs):
         opcao = shortcuts.get_object_or_404(models.Opcao,
-                                            id=request.POST["opcao"])
+                                            id=request.POST["opcao"],
+                                            enquete=kwargs["id"])
         models.Voto.objects.create(opcao=opcao)
         return http.HttpResponse("voto computado")

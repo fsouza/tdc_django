@@ -54,3 +54,15 @@ class EnqueteTestCase(test.TestCase):
                                              dados)
         with self.assertRaises(http.Http404):
             views.EnqueteView().dispatch(request, id=self.enquete.pk)
+
+    def test_deve_retornar_404_quando_opcao_nao_eh_da_enquete(self):
+        enquete = models.Enquete.objects.create(
+            titulo=u"O que vc achou do TDC 2013?",
+            descricao=u"queremos ouvir vc",
+        )
+        opcao = models.Opcao.objects.create(titulo="Muito bom", enquete=enquete)
+        dados = {"opcao": opcao.pk}
+        request = test.RequestFactory().post("/enquetes/{0}".format(self.enquete.pk),
+                                             dados)
+        with self.assertRaises(http.Http404):
+            views.EnqueteView().dispatch(request, id=self.enquete.pk)

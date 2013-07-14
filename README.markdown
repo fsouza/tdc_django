@@ -6,4 +6,6 @@ do [TDC 2013](http://www.thedevelopersconference.com.br/#saopaulo).
 
 #Referências
 
+* [Heroku](http://heroku.com), PaaS com suporte a Django
+* [OpenShift](https://www.openshift.com), PaaS com suporte a Django
 * [Tsuru](http://tsuru.io), PaaS usado para deployar o código

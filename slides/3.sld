@@ -9,7 +9,5 @@ Apenas para não nos perdermos:
 - Uma enquete é composta por várias opções, e cada voto equivale somente a uma
   opção
 - Gostaríamos de:
+	- cadastrar enquete (via interface administrativa)
 	- poder votar (via interface pública)
-	- conferir os resultados parciais de uma enquete (com consolidação de
-	  porcentagem)
-	- fechar a enquete (via interface administrativa)

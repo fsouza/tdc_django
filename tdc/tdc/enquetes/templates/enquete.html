@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Vote "{{ enquete.titulo }}"</title>
+	</head>
+	<body>
+		<h1>{{ enquete.titulo }}</h1>
+		<form action="" method="post" accept-charset="utf-8">
+			{% csrf_token %}
+			{% for opcao in enquete.opcao_set.all %}
+			<input type="radio" name="opcao" value="{{ opcao.id }}" id="opcao_{{ id }}"> {{opcao.titulo}}<br>
+			{% endfor %}
+			<button type="submit">Votar</button>
+		</form>
+	</body>
+</html>

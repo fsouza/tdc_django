@@ -14,3 +14,8 @@ class EnqueteView(base.View):
         return response.TemplateResponse(request,
                                          "enquete.html",
                                          {"enquete": enquete})
+
+    def post(self, request, *args, **kwargs):
+        opcao = models.Opcao.objects.get(id=request.POST["opcao"])
+        models.Voto.objects.create(opcao=opcao)
+        return http.HttpResponse("voto computado")

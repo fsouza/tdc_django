@@ -38,3 +38,12 @@ class EnqueteTestCase(test.TestCase):
         view = views.EnqueteView()
         with self.assertRaises(http.Http404):
             view.dispatch(request, id=self.enquete.id + 1)
+
+    def test_deve_registrar_voto_no_POST(self):
+        opcao = self.enquete.opcao_set.all()[0].pk
+        dados = {"opcao": opcao}
+        request = test.RequestFactory().post("/enquetes/{0}".format(self.enquete.pk),
+                                             dados)
+        resp = views.EnqueteView().dispatch(request, id=self.enquete.pk)
+        self.assertEqual(200, resp.status_code)
+        models.Voto.objects.get(opcao=opcao)

@@ -11,6 +11,11 @@ class EnqueteTestCase(test.TestCase):
     def test_deve_estar_registrada(self):
         registry = django_admin.site._registry
         self.assertIn(models.Enquete, registry)
+        self.assertIsInstance(registry[models.Enquete],
+                              admin.EnqueteAdmin)
+
+    def test_deve_usar_opcao_inline(self):
+        self.assertIn(admin.OpcaoInline, admin.EnqueteAdmin.inlines)
 
 
 class OpcaoInlinceTestCase(test.TestCase):

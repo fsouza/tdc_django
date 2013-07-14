@@ -12,8 +12,15 @@ class EnqueteTestCase(test.TestCase):
             titulo=u"Qual sua linguagem preferida?",
             descricao=u"Escolhe ae",
         )
+        self.opcoes = models.Opcao.objects.bulk_create([
+            models.Opcao(enquete=self.enquete, titulo=u"Java"),
+            models.Opcao(enquete=self.enquete, titulo=u"C++"),
+            models.Opcao(enquete=self.enquete, titulo=u"Ruby"),
+            models.Opcao(enquete=self.enquete, titulo=u"Python"),
+        ])
 
     def tearDown(self):
+        models.Opcao.objects.filter(enquete=self.enquete).delete()
         self.enquete.delete()
 
     def test_deve_renderizar_template_com_enquete_no_contexto(self):

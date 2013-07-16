@@ -6,6 +6,9 @@
 	</head>
 	<body>
 		<h1>{{ enquete.titulo }}</h1>
+		{% if erro %}
+		<em>{{ erro }}</em>
+		{% endif %}
 		<form action="" method="post" accept-charset="utf-8">
 			{% csrf_token %}
 			{% for opcao in enquete.opcao_set.all %}

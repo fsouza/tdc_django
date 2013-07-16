@@ -1,3 +1,5 @@
+# coding: utf-8
+
 from django import http, test
 from django.template import response
 from django.test import client
@@ -66,3 +68,11 @@ class EnqueteTestCase(test.TestCase):
                                              dados)
         with self.assertRaises(http.Http404):
             views.EnqueteView().dispatch(request, id=self.enquete.pk)
+
+    def test_deve_exibir_mensagem_de_erro_em_caso_de_opcao_em_branco(self):
+        request = test.RequestFactory().post("/enquetes/{0}".format(self.enquete.pk), {})
+        resp = views.EnqueteView().dispatch(request, id=self.enquete.pk)
+        self.assertIsInstance(resp, response.TemplateResponse)
+        self.assertEqual("enquete.html", resp.template_name)
+        self.assertEqual(u"Por favor, escolha uma opção.",
+                         resp.context_data["erro"])
